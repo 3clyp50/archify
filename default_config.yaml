@@ -1,0 +1,8 @@
+# Where diagrams appear
+chat_results: true          # attach diagram cards to chat tool results (default)
+canvas_enabled: false       # register Archify as a right-canvas surface
+auto_open_canvas: false     # open each new diagram in the canvas automatically (needs canvas_enabled)
+inline_preview: true        # show a live mini-preview inside the chat card
+# Rendering
+quality: showcase           # showcase | standard
+output_dir: usr/workdir/archify

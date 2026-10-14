@@ -1,0 +1,38 @@
+<html>
+<head>
+  <link rel="stylesheet" href="/plugins/archify/webui/archify.css" />
+  <script type="module" src="/plugins/archify/webui/archify-store.js"></script>
+</head>
+<body>
+  <div x-data style="height:100%">
+    <template x-if="$store.archify">
+      <div class="archify-panel archify-canvas-panel" x-init="$store.archify.refreshRecent()">
+        <div class="archify-toolbar">
+          <div class="archify-type-badge"><x-icon :name="$store.archify.iconFor($store.archify.canvasDiagram?.type)"></x-icon></div>
+          <select aria-label="Diagram" :value="$store.archify.canvasDiagram?.id || ''" @change="$store.archify.selectCanvasDiagram($event.target.value)" :disabled="!$store.archify.recent.length">
+            <template x-if="!$store.archify.recent.length"><option value="">No diagrams yet</option></template>
+            <template x-for="item in $store.archify.recent" :key="item.id">
+              <option :value="item.id" :selected="item.id === $store.archify.canvasDiagram?.id" x-text="item.title + ' · ' + item.type"></option>
+            </template>
+          </select>
+          <button type="button" class="archify-icon-button" title="Refresh" @click="$store.archify.refreshRecent()" :disabled="$store.archify.loadingRecent"><x-icon name="refresh"></x-icon></button>
+          <button type="button" class="archify-icon-button" title="Open in new tab" :disabled="!$store.archify.canvasDiagram" @click="$store.archify.openInNewTab($store.archify.canvasDiagram)"><x-icon name="open_in_new"></x-icon></button>
+          <button type="button" class="archify-icon-button" title="Download HTML" :disabled="!$store.archify.canvasDiagram" @click="$store.archify.download($store.archify.canvasDiagram)"><x-icon name="download"></x-icon></button>
+        </div>
+        <div class="archify-frame-wrap">
+          <template x-if="$store.archify.canvasUrl()">
+            <iframe :src="$store.archify.canvasUrl()" :aria-label="$store.archify.canvasDiagram?.title || 'Archify diagram'" sandbox="allow-scripts allow-same-origin allow-downloads allow-popups"></iframe>
+          </template>
+          <template x-if="!$store.archify.canvasUrl()">
+            <div class="archify-empty">
+              <x-icon name="schema"></x-icon>
+              <strong>No diagrams yet</strong>
+              <p>Ask Agent Zero to draw an architecture, workflow, sequence, data flow, state machine, schema or timeline. New diagrams appear here.</p>
+            </div>
+          </template>
+        </div>
+      </div>
+    </template>
+  </div>
+</body>
+</html>

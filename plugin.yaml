@@ -1,0 +1,8 @@
+name: archify
+title: Archify Diagrams
+description: "Turn plain-language requests into validated, interactive Archify diagrams in Agent Zero chat: architecture, workflow, sequence, ERD and six more types, rendered locally with PNG/SVG/WebM export."
+version: 1.0.0
+settings_sections:
+  - agent
+per_project_config: true
+per_agent_config: false

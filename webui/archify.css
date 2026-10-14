@@ -1,0 +1,207 @@
+/* Archify for Agent Zero: chat card, viewer modal, canvas panel */
+
+.archify-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  margin: 0.25rem 0 0.6rem;
+  padding: 0.75rem;
+  max-width: 64rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius-sm, 0.5rem);
+  background: color-mix(in srgb, var(--color-panel) 85%, transparent);
+  font-family: var(--font-family-main);
+  color: var(--color-text);
+}
+
+.archify-card-header {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  min-width: 0;
+}
+
+.archify-type-badge {
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  width: 2.1rem;
+  height: 2.1rem;
+  border-radius: 0.5rem;
+  background: color-mix(in srgb, var(--color-highlight) 18%, transparent);
+  color: var(--color-highlight);
+  border: 1px solid color-mix(in srgb, var(--color-highlight) 35%, transparent);
+}
+
+.archify-type-badge x-icon { font-size: 1.2rem; }
+
+.archify-card-info { min-width: 0; display: flex; flex-direction: column; gap: 0.15rem; }
+
+.archify-card-title {
+  font-weight: 500;
+  font-size: 0.95rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.archify-card-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  font-size: 0.72rem;
+  color: var(--color-text-muted);
+}
+
+.archify-card-meta span {
+  padding: 0.05rem 0.45rem;
+  border-radius: 999px;
+  border: 1px solid var(--color-border);
+  text-transform: lowercase;
+}
+
+.archify-preview {
+  position: relative;
+  height: 30rem;
+  min-height: 14rem;
+  max-height: 85vh;
+  resize: vertical;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  background: var(--color-background);
+}
+
+.archify-preview iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.archify-preview-expand {
+  position: absolute;
+  left: 0.5rem;
+  bottom: 0.5rem;
+  display: grid;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--color-border);
+  color: var(--color-text);
+  background: color-mix(in srgb, var(--color-panel) 88%, transparent);
+  cursor: pointer;
+  opacity: 0.75;
+  transition: opacity 0.15s ease;
+}
+.archify-preview-expand:hover, .archify-preview-expand:focus-visible { opacity: 1; }
+
+.archify-card-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.archify-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.3rem 0.65rem;
+  font-size: 0.78rem;
+  font-family: inherit;
+  color: var(--color-text);
+  background: transparent;
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.archify-action x-icon { font-size: 1rem; }
+.archify-action:hover { background: var(--color-background-hover); }
+.archify-action.primary {
+  border-color: color-mix(in srgb, var(--color-highlight) 55%, transparent);
+  background: color-mix(in srgb, var(--color-highlight) 16%, transparent);
+}
+.archify-action.primary:hover { background: color-mix(in srgb, var(--color-highlight) 26%, transparent); }
+
+@media (max-width: 640px) {
+  .archify-preview { height: 22rem; }
+  .archify-action span { display: none; }
+  .archify-action { padding: 0.35rem; }
+}
+
+/* Viewer modal + canvas panel */
+.archify-panel {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  font-family: var(--font-family-main);
+  color: var(--color-text);
+}
+
+.archify-modal .archify-panel { height: min(78vh, 60rem); width: 100%; max-width: 100%; min-width: 0; box-sizing: border-box; overflow: hidden; }
+.archify-modal .archify-toolbar { flex-wrap: nowrap; }
+
+.archify-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.45rem 0.6rem;
+  border-bottom: 1px solid var(--color-border);
+  min-width: 0;
+}
+
+.archify-toolbar .archify-type-badge { width: 1.8rem; height: 1.8rem; }
+.archify-toolbar-title { flex: 1 1 auto; min-width: 0; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+.archify-toolbar select {
+  flex: 1 1 auto;
+  min-width: 0;
+  max-width: 28rem;
+  padding: 0.3rem 0.5rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--color-border);
+  background: var(--color-input, var(--color-panel));
+  color: var(--color-text);
+  font-family: inherit;
+}
+
+.archify-icon-button {
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 0.5rem;
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--color-text);
+  cursor: pointer;
+}
+.archify-icon-button:hover { background: var(--color-background-hover); border-color: var(--color-border); }
+.archify-icon-button:disabled { opacity: 0.4; cursor: default; }
+
+.archify-frame-wrap { position: relative; flex: 1 1 auto; min-height: 0; background: var(--color-background); }
+.archify-frame-wrap iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+
+.archify-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  height: 100%;
+  padding: 2rem;
+  text-align: center;
+  color: var(--color-text-muted);
+}
+.archify-empty x-icon { font-size: 2.6rem; color: var(--color-highlight); }
+.archify-empty strong { color: var(--color-text); font-weight: 500; }
+.archify-empty p { max-width: 26rem; margin: 0; font-size: 0.85rem; line-height: 1.45; }
+
+.archify-action[hidden] { display: none !important; }

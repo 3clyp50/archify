@@ -1,0 +1,14 @@
+<div
+  class="right-canvas-surface-panel archify-canvas-surface"
+  data-surface-id="archify"
+  x-show="$store.rightCanvas?.getSurface?.('archify')"
+  :class="{
+    'is-active': $store.rightCanvas?.isSurfaceVisible('archify'),
+    'is-mounted': $store.rightCanvas?.isSurfaceRendered('archify')
+  }"
+  :aria-hidden="(!$store.rightCanvas?.isSurfaceVisible('archify')).toString()"
+>
+  <template x-if="$store.rightCanvas?.isSurfaceRendered('archify')">
+    <x-component path="/plugins/archify/webui/archify-panel.html" mode="canvas"></x-component>
+  </template>
+</div>

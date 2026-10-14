@@ -1,0 +1,38 @@
+<html>
+<head><title>Archify Diagrams</title></head>
+<body>
+<div x-data>
+  <template x-if="config">
+    <div>
+      <div class="section-title">Where diagrams appear</div>
+      <div class="section-description">By default diagrams appear only as cards in chat, so the workspace stays calm. Turn on the canvas if you want a docked Archify panel too. Reload the page after changing canvas options.</div>
+      <div class="field">
+        <div class="field-label"><div class="field-title">Show diagrams in chat results</div><div class="field-description">Attach a diagram card with Open, New tab and Download actions to each Archify tool result.</div></div>
+        <div class="field-control"><label class="toggle"><input type="checkbox" x-model="config.chat_results" /><span class="toggler"></span></label></div>
+      </div>
+      <div class="field" x-show="config.chat_results">
+        <div class="field-label"><div class="field-title">Live preview in chat card</div><div class="field-description">Embed a small live preview of the diagram in the card. Turn off for lighter chats.</div></div>
+        <div class="field-control"><label class="toggle"><input type="checkbox" x-model="config.inline_preview" /><span class="toggler"></span></label></div>
+      </div>
+      <div class="field">
+        <div class="field-label"><div class="field-title">Enable Archify in the right canvas</div><div class="field-description">Adds an Archify surface to the canvas with a picker of recent diagrams, and an Open in canvas action on chat cards.</div></div>
+        <div class="field-control"><label class="toggle"><input type="checkbox" x-model="config.canvas_enabled" @change="if (!config.canvas_enabled) config.auto_open_canvas = false" /><span class="toggler"></span></label></div>
+      </div>
+      <div class="field" x-show="config.canvas_enabled">
+        <div class="field-label"><div class="field-title">Open new diagrams in the canvas automatically</div><div class="field-description">Otherwise the canvas opens only when you click Open in canvas, or when you ask the agent to show it there.</div></div>
+        <div class="field-control"><label class="toggle"><input type="checkbox" x-model="config.auto_open_canvas" /><span class="toggler"></span></label></div>
+      </div>
+      <div class="section-title">Rendering</div>
+      <div class="field">
+        <div class="field-label"><div class="field-title">Quality profile</div><div class="field-description">Showcase enforces spacious, presentation-ready layouts. Standard allows denser maps (large schemas).</div></div>
+        <div class="field-control"><select x-model="config.quality"><option value="showcase">Showcase</option><option value="standard">Standard</option></select></div>
+      </div>
+      <div class="field">
+        <div class="field-label"><div class="field-title">Output folder</div><div class="field-description">Relative to Agent Zero root, must stay inside usr/. Each diagram gets its own folder with candidate.json and the HTML.</div></div>
+        <div class="field-control"><input type="text" x-model="config.output_dir" placeholder="usr/workdir/archify" /></div>
+      </div>
+    </div>
+  </template>
+</div>
+</body>
+</html>

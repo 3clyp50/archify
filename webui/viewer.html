@@ -1,0 +1,29 @@
+<html class="archify-modal">
+<head>
+  <title>Archify</title>
+  <link rel="stylesheet" href="/plugins/archify/webui/archify.css" />
+  <script type="module" src="/plugins/archify/webui/archify-store.js"></script>
+</head>
+<body>
+  <div x-data>
+    <template x-if="$store.archify">
+      <div class="archify-panel">
+        <div class="archify-toolbar">
+          <div class="archify-type-badge"><x-icon :name="$store.archify.iconFor($store.archify.current?.type)"></x-icon></div>
+          <div class="archify-toolbar-title" x-text="$store.archify.current?.title || 'Archify diagram'"></div>
+          <template x-if="$store.archify.config.canvas_enabled">
+            <button type="button" class="archify-icon-button" title="Open in canvas" @click="const d = $store.archify.current; closeModal(); $store.archify.openInCanvas(d)"><x-icon name="dock_to_right"></x-icon></button>
+          </template>
+          <button type="button" class="archify-icon-button" title="Open in new tab" @click="$store.archify.openInNewTab($store.archify.current)"><x-icon name="open_in_new"></x-icon></button>
+          <button type="button" class="archify-icon-button" title="Download HTML" @click="$store.archify.download($store.archify.current)"><x-icon name="download"></x-icon></button>
+        </div>
+        <div class="archify-frame-wrap" x-init="$store.archify.loadConfig()">
+          <template x-if="$store.archify.viewerUrl()">
+            <iframe :src="$store.archify.viewerUrl()" :aria-label="$store.archify.current?.title || 'Archify diagram'" sandbox="allow-scripts allow-same-origin allow-downloads allow-popups"></iframe>
+          </template>
+        </div>
+      </div>
+    </template>
+  </div>
+</body>
+</html>
